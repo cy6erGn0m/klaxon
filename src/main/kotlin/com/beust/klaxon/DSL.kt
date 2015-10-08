@@ -11,9 +11,9 @@ public fun valueToString(v: Any?, prettyPrint: Boolean = false) : String =
 
 public interface JsonBase {
     fun appendJsonStringImpl(result: Appendable, prettyPrint: Boolean, level: Int)
-    final fun appendJsonString(result : Appendable, prettyPrint: Boolean = false) =
+    fun appendJsonString(result : Appendable, prettyPrint: Boolean = false) =
             appendJsonStringImpl(result, prettyPrint, 0)
-    final fun toJsonString(prettyPrint: Boolean = false) : String =
+    fun toJsonString(prettyPrint: Boolean = false) : String =
             StringBuilder { appendJsonString(this, prettyPrint) }.toString()
 }
 

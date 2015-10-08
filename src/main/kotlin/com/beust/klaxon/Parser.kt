@@ -50,14 +50,14 @@ class World(var status : Status) {
     }
 
     fun hasValues() : Boolean {
-        return valueStack.size() > 1
+        return valueStack.size > 1
     }
 }
 
 private data class TokenStatus(val status: Status, val tokenType: Type)
 
 class StateMachine {
-    val map = hashMapOf<TokenStatus, (world: World, token: Token) -> World>()
+    private val map = hashMapOf<TokenStatus, (world: World, token: Token) -> World>()
 
     fun put(status: Status, tokenType: Type, processor: (world: World, token: Token) -> World) {
         map.put(TokenStatus(status, tokenType), processor)
@@ -69,7 +69,7 @@ class StateMachine {
         val result = if (processor != null) {
             processor(world, token)
         } else {
-            val message = "No state found: ${world.status} ${token}"
+            val message = "No state found: ${world.status} $token"
             throw RuntimeException(message)
         }
 
